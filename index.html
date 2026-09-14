@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جنگ جهانی رویال | WWR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #12150F;
+    --bg-panel: #212819;
+    --bg-panel-2: #262E1D;
+    --line: #454F35;
+    --line-soft: #2E3624;
+    --text: #F3EFDF;
+    --text-muted: #A8AE8F;
+    --accent: #E2542A;
+    --accent-soft: #5A2A18;
+    --gold: #E8BC3F;
+    --radius: 3px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 85% -10%, rgba(124,139,147,0.05), transparent 40%),
+      radial-gradient(circle at -5% 40%, rgba(201,162,39,0.03), transparent 45%);
+    color: var(--text);
+    font-family: 'Vazirmatn', sans-serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  .wrap{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(18,21,15,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+  }
+  .brand{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.2px;
+  }
+  .brand .tag{
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 1px;
+    flex-shrink: 0;
+    transform: rotate(45deg);
+  }
+  .brand .sub{
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 13px;
+    margin-inline-start: 4px;
+  }
+  .nav-links{
+    display: flex;
+    align-items: center;
+    gap: 26px;
+  }
+  .nav-links a{
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 14.5px;
+    font-weight: 600;
+    transition: color .15s ease;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: 'Vazirmatn', sans-serif;
+    padding: 0;
+  }
+  .nav-links a:hover{ color: var(--gold); }
+  .nav-links a.active{ color: var(--text); }
+  .nav-cta{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #FBF3EC;
+    padding: 9px 18px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .nav-cta:hover{ background: #C4431E; }
+
+  /* ---------- Page switching ---------- */
+  .page{ display: none; }
+  .page.active{ display: block; }
+
+  /* ---------- Rules page ---------- */
+  .page-hero{
+    position: relative;
+    padding: 64px 0 56px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line-soft);
+    background:
+      linear-gradient(180deg, rgba(8,9,7,0.55) 0%, rgba(8,9,7,0.88) 75%, var(--bg) 100%),
+      url('wwr-cover.png');
+    background-size: cover;
+    background-position: center 22%;
+  }
+  .page-hero .wrap{ position: relative; z-index: 2; }
+  .page-hero p.lead{
+    color: var(--text-muted);
+    font-size: 16px;
+    max-width: 560px;
+    margin: 0;
+  }
+  main{ padding: 20px 0 90px; }
+  .rule-block{
+    padding: 46px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .rule-block:last-child{ border-bottom: none; }
+  .rule-head{
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .rule-num{
+    color: var(--gold);
+    font-weight: 800;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .rule-head h2{
+    font-size: clamp(20px, 2.6vw, 25px);
+    font-weight: 800;
+    margin: 0;
+  }
+  .rule-body{
+    background: var(--bg-panel);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    color: var(--text);
+    font-size: 14.5px;
+    max-width: 100%;
+  }
+  .rule-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .rule-list li{
+    position: relative;
+    padding-inline-start: 20px;
+    font-size: 14.5px;
+    color: var(--text);
+  }
+  .rule-list li::before{
+    content: "";
+    position: absolute;
+    inline-size: 6px;
+    block-size: 6px;
+    background: var(--gold);
+    border-radius: 1px;
+    transform: rotate(45deg);
+    inset-inline-start: 0;
+    top: 9px;
+  }
+  .score-table{ display: flex; flex-direction: column; }
+  .score-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-soft);
+    gap: 16px;
+  }
+  .score-row:last-child{ border-bottom: none; }
+  .score-label{ color: var(--text); font-size: 14.5px; }
+  .score-value{ color: var(--gold); font-weight: 800; font-size: 14.5px; white-space: nowrap; }
+
+  /* ---------- Form cards (copyable templates) ---------- */
+  .form-card{
+    background: var(--bg-panel);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .form-card-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line-soft);
+    background: var(--bg-panel-2);
+  }
+  .form-card-head span{ font-size: 13.5px; color: var(--text-muted); }
+  .copy-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--text);
+    padding: 7px 14px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Vazirmatn', sans-serif;
+    cursor: pointer;
+    transition: border-color .15s ease, color .15s ease;
+    flex-shrink: 0;
+  }
+  .copy-btn:hover{ border-color: var(--gold); color: var(--gold); }
+  .copy-btn.copied{ border-color: var(--gold); color: var(--gold); }
+  .copy-btn svg{ width: 14px; height: 14px; flex-shrink: 0; }
+  .form-text{
+    white-space: pre-wrap;
+    direction: rtl;
+    text-align: right;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 13.5px;
+    line-height: 2;
+    color: var(--text-muted);
+    margin: 0;
+    padding: 18px 20px;
+  }
+
+  /* ---------- Forms page ---------- */
+  .form-index{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .form-index a{
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 13px;
+    border: 1px solid var(--line-soft);
+    padding: 6px 12px;
+    border-radius: 999px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .form-index a:hover{ color: var(--gold); border-color: var(--gold); }
+  .form-card{
+    background: var(--bg-panel);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    scroll-margin-top: 90px;
+  }
+  .form-card-actions{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+  }
+  .copy-btn{
+    background: rgba(232,188,63,0.08);
+    border: 1px solid rgba(232,188,63,0.35);
+    color: var(--gold);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 7px 14px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .copy-btn:hover{ background: rgba(232,188,63,0.16); }
+  .copy-btn.copied{ background: var(--gold); color: #1B1503; border-color: var(--gold); }
+  .form-text{
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.95;
+    color: var(--text-muted);
+    margin: 0;
+    direction: rtl;
+    text-align: right;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position: relative;
+    padding: 110px 0 130px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line-soft);
+    background: #08090A;
+    perspective: 1200px;
+  }
+  .hero-stage{
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform .25s ease-out;
+  }
+  .hero-media{
+    position: absolute;
+    inset: -40px;
+    background-image: url('wwr-cover.png');
+    background-size: cover;
+    background-position: center 32%;
+    transform: translateZ(-40px) scale(1.06);
+    animation: heroDrift 26s ease-in-out infinite alternate;
+  }
+  @keyframes heroDrift{
+    0%   { transform: translateZ(-40px) scale(1.06) translateX(0); }
+    100% { transform: translateZ(-40px) scale(1.15) translateX(-1.2%); }
+  }
+  .hero-vignette{
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(6,7,6,0.28) 0%, rgba(6,7,6,0.5) 45%, rgba(6,7,6,0.94) 100%),
+      radial-gradient(ellipse 80% 60% at 50% 28%, rgba(6,7,6,0) 0%, rgba(6,7,6,0.55) 100%);
+  }
+  .hero-embers{
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateZ(20px);
+  }
+  .hero-embers span{
+    position: absolute;
+    bottom: -10px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 7px 1.5px rgba(201,162,39,0.75);
+    opacity: 0;
+    animation: emberRise linear infinite;
+  }
+  @keyframes emberRise{
+    0%   { transform: translate(0,0); opacity: 0; }
+    12%  { opacity: .85; }
+    85%  { opacity: .25; }
+    100% { transform: translate(var(--drift,15px), -520px); opacity: 0; }
+  }
+  .hero-inner{
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+    transform: translateZ(60px);
+  }
+  .eyebrow-row{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 22px;
+    border: 1px solid rgba(201,162,39,0.3);
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(8,9,7,0.45);
+    backdrop-filter: blur(3px);
+  }
+  .dot-live{
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 0 rgba(201,162,39,0.6);
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow: 0 0 0 0 rgba(201,162,39,0.45); }
+    70%{ box-shadow: 0 0 0 9px rgba(201,162,39,0); }
+    100%{ box-shadow: 0 0 0 0 rgba(201,162,39,0); }
+  }
+  h1{
+    font-size: clamp(38px, 6vw, 66px);
+    font-weight: 900;
+    margin: 0 0 20px;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+  .hero p.lead{
+    color: var(--text-muted);
+    font-size: 17px;
+    max-width: 540px;
+    margin: 0 auto 34px;
+  }
+  .hero-actions{
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary{
+    background: var(--accent);
+    color: #FBF3EC;
+    padding: 14px 30px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    display: inline-block;
+    transition: background .15s ease;
+  }
+  .btn-primary:hover{ background: #C4431E; }
+  .btn-ghost{
+    border: 1px solid var(--line);
+    color: var(--text);
+    padding: 14px 30px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    display: inline-block;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .btn-ghost:hover{ border-color: var(--gold); background: rgba(201,162,39,0.06); }
+
+  /* ---------- Section shell ---------- */
+  section{ padding: 78px 0; border-bottom: 1px solid var(--line-soft); }
+  section:last-of-type{ border-bottom: none; }
+  .sec-head{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 38px;
+    flex-wrap: wrap;
+  }
+  .sec-code{
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  h2{
+    font-size: clamp(24px, 3.4vw, 32px);
+    font-weight: 800;
+    margin: 6px 0 0;
+  }
+  .sec-desc{
+    color: var(--text-muted);
+    max-width: 520px;
+    font-size: 15px;
+  }
+
+  /* ---------- Briefing (About) ---------- */
+  .briefing{
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 50px;
+    align-items: start;
+  }
+  .briefing p{ margin: 0 0 18px; color: var(--text); }
+  .briefing p:last-child{ margin-bottom: 0; }
+  .stat-panel{
+    background: var(--bg-panel);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 26px;
+  }
+  .stat-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .stat-row:last-child{ border-bottom: none; }
+  .stat-label{ color: var(--text-muted); font-size: 14px; }
+  .stat-value{ font-weight: 800; font-size: 15px; color: var(--gold); }
+
+  /* ---------- Operations archive ---------- */
+  .op-list{ display: flex; flex-direction: column; gap: 2px; }
+  .op-item{
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 18px;
+    align-items: center;
+    background: var(--bg-panel);
+    border: 1px solid var(--line-soft);
+    border-right: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+  }
+  .op-code{
+    font-weight: 800;
+    color: var(--gold);
+    font-size: 14px;
+  }
+  .op-title{ font-weight: 700; font-size: 15.5px; margin-bottom: 4px; }
+  .op-sub{ color: var(--text-muted); font-size: 13.5px; }
+  .op-type{
+    font-size: 12.5px;
+    color: var(--text-muted);
+    border: 1px solid var(--line);
+    padding: 5px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .archive-note{
+    margin-top: 20px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    border-top: 1px dashed var(--line);
+    padding-top: 16px;
+  }
+
+  /* ---------- Support / Dispatch form ---------- */
+  .dispatch{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+  .dispatch-info h3{
+    font-size: 17px;
+    margin: 0 0 10px;
+  }
+  .dispatch-info p{ color: var(--text-muted); font-size: 14.5px; margin: 0 0 22px; }
+  .channel-info{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background: var(--bg-panel);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin-top: 24px;
+  }
+  .channel-info .glyph{
+    width: 34px; height: 34px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    flex-shrink: 0;
+  }
+  .channel-info a{ color: var(--gold); font-weight: 700; text-decoration: none; font-size: 13.5px; word-break: break-all; }
+
+  form{
+    background: var(--bg-panel);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  label{ font-size: 13.5px; color: var(--text-muted); display: block; margin-bottom: 6px; }
+  input, select, textarea{
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--text);
+    padding: 11px 13px;
+    border-radius: var(--radius);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14.5px;
+    outline: none;
+    transition: border-color .15s ease;
+  }
+  input:focus, select:focus, textarea:focus{ border-color: var(--gold); }
+  textarea{ resize: vertical; min-height: 100px; }
+  .submit-btn{
+    background: var(--accent);
+    color: #FBF3EC;
+    border: none;
+    padding: 13px 20px;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Vazirmatn', sans-serif;
+    transition: background .15s ease;
+  }
+  .submit-btn:hover{ background: #C4431E; }
+  .form-note{
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    display: none;
+  }
+  .form-note.show{ display: block; }
+
+  /* ---------- FAQ ---------- */
+  .faq-item{
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .faq-item:first-child{ border-top: 1px solid var(--line-soft); }
+  .faq-q{
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 15.5px;
+    font-weight: 700;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-align: right;
+  }
+  .faq-q .icon{
+    color: var(--gold);
+    font-size: 20px;
+    transition: transform .2s ease;
+    flex-shrink: 0;
+    margin-inline-start: 16px;
+  }
+  .faq-item.open .faq-q .icon{ transform: rotate(45deg); }
+  .faq-a{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .25s ease;
+  }
+  .faq-a p{
+    color: var(--text-muted);
+    font-size: 14.5px;
+    padding-bottom: 20px;
+    margin: 0;
+    max-width: 640px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{ padding: 40px 0 60px; }
+  .foot-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .foot-brand{ font-weight: 800; }
+  .foot-note{ color: var(--text-muted); font-size: 13px; }
+
+  @media (max-width: 760px){
+    .briefing, .dispatch{ grid-template-columns: 1fr; }
+    .op-item{ grid-template-columns: 1fr; }
+    .op-code{ order: 2; }
+    .op-type{ justify-self: start; }
+    .nav-links{ gap: 16px; }
+    .nav-links a{ font-size: 13px; }
+  }
+  @media (max-width: 560px){
+    .nav-cta{ padding: 8px 12px; font-size: 12.5px; }
+    .brand{ font-size: 15px; }
+    .brand .sub{ display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="tag"></span>
+      جنگ جهانی رویال <span class="sub">WWR</span>
+    </div>
+    <nav class="nav-links">
+      <a data-page="home" class="active">خانه</a>
+      <a data-page="rules">قوانین بازی</a>
+      <a data-page="forms">فرم‌های بازی</a>
+    </nav>
+    <a class="nav-cta" href="https://splus.ir/httpstmeWorldWarRoyal" target="_blank" rel="noopener">عضویت در کانال</a>
+  </div>
+</header>
+
+<div id="page-home" class="page active">
+
+<section class="hero" id="heroSection">
+  <div class="hero-stage" id="heroStage">
+    <div class="hero-media"></div>
+    <div class="hero-vignette"></div>
+    <div class="hero-embers" id="heroEmbers"></div>
+  </div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow-row"><span class="dot-live"></span> بازی نقش‌آفرینی جنگی در پیام‌رسان سروش</div>
+    <h1>جنگ جهانی رویال</h1>
+    <p class="lead">هر عضو یه کشور رو می‌گیره، با بقیه متحد یا دشمن می‌شه و وارد جنگ می‌شه. اینجا مرکز پشتیبانیه — قوانین بازی رو بخون، عضو شو یا سوالتو بپرس.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://splus.ir/httpstmeWorldWarRoyal" target="_blank" rel="noopener">الحاق به کانال ↗</a>
+      <a class="btn-ghost" href="#support">درخواست پشتیبانی</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-code">۰۱ / بریفینگ</div>
+        <h2>بازی چطور کار می‌کنه</h2>
+      </div>
+    </div>
+    <div class="briefing">
+      <div>
+        <p>«جنگ جهانی رویال» یه بازی نقش‌آفرینی جنگیه توی سروش. هر عضو یه کشور رو انتخاب می‌کنه و از همون‌جا بازی شروع می‌شه: باید با بقیه‌ی کشورها رابطه بسازی، یا متحد می‌شی یا دشمن، و بر اساس همین روابط وارد جنگ می‌شید.</p>
+        <p>نتیجه‌ی جنگ‌ها و تصمیم‌های هر کشور روی مسیر بازی تاثیر می‌ذاره. علاوه بر جوایز درون‌بازی، برای بازیکن‌های برتر جایزه‌ی نقدی هم در نظر گرفته شده.</p>
+        <p>این سایت مکمل کاناله. قوانین کامل، جدول کشورها و نحوه‌ی عضویت توی خود کانال اعلام می‌شه؛ این‌جا یه نمای کلی از مکانیزم بازی و یه راه ساده برای تماس با پشتیبانی می‌بینی.</p>
+      </div>
+      <div class="stat-panel">
+        <div class="stat-row"><span class="stat-label">پلتفرم</span><span class="stat-value">پیام‌رسان سروش پلاس</span></div>
+        <div class="stat-row"><span class="stat-label">نوع بازی</span><span class="stat-value">نقش‌آفرینی جنگی / استراتژیک</span></div>
+        <div class="stat-row"><span class="stat-label">مکانیزم اصلی</span><span class="stat-value">انتخاب کشور، اتحاد و دشمنی</span></div>
+        <div class="stat-row"><span class="stat-label">جوایز</span><span class="stat-value">درون‌بازی + نقدی</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="archive">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-code">۰۲ / آرشیو عملیات‌ها</div>
+        <h2>توی کانال چه اتفاقی می‌افته</h2>
+      </div>
+      <p class="sec-desc">این لیست نمونه‌ست — بعداً می‌تونیم با اسم و لینک پست‌های واقعی خودت جایگزینش کنیم.</p>
+    </div>
+    <div class="op-list">
+      <div class="op-item">
+        <span class="op-code">OP–01</span>
+        <div>
+          <div class="op-title">انتخاب کشور</div>
+          <div class="op-sub">اعلام کشورهای آزاد و ثبت‌نام اعضای جدید برای گرفتن یه کشور</div>
+        </div>
+        <span class="op-type">ثبت‌نام</span>
+      </div>
+      <div class="op-item">
+        <span class="op-code">OP–02</span>
+        <div>
+          <div class="op-title">اعلام اتحادها و دشمنی‌ها</div>
+          <div class="op-sub">گزارش رسمی از روابط جدید بین کشورها قبل از شروع جنگ</div>
+        </div>
+        <span class="op-type">دیپلماسی</span>
+      </div>
+      <div class="op-item">
+        <span class="op-code">OP–03</span>
+        <div>
+          <div class="op-title">گزارش نبردها</div>
+          <div class="op-sub">نتیجه‌ی جنگ‌های انجام‌شده و تاثیرش روی جدول بازی</div>
+        </div>
+        <span class="op-type">جنگ</span>
+      </div>
+      <div class="op-item">
+        <span class="op-code">OP–04</span>
+        <div>
+          <div class="op-title">اعلام جوایز</div>
+          <div class="op-sub">معرفی برترین کشورهای دوره و جوایز درون‌بازی و نقدی</div>
+        </div>
+        <span class="op-type">جایزه</span>
+      </div>
+    </div>
+    <div class="archive-note">می‌خوای این بخش رو با پست‌های واقعی کانالت پر کنیم؟ اسم و لینک چندتا پست رو بفرست تا جایگزین کنم. برای قوانین کامل بازی هم <a data-page="rules" style="color: var(--gold); font-weight: 700; cursor: pointer;">صفحه‌ی قوانین</a> رو ببین.</div>
+  </div>
+</section>
+
+<section id="support">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-code">۰۳ / پشتیبانی</div>
+        <h2>سوال داری یا مشکلی پیش اومده؟</h2>
+      </div>
+    </div>
+    <div class="dispatch">
+      <div class="dispatch-info">
+        <h3>راه‌های ارتباط</h3>
+        <p>فرم کنار رو پر کن تا پیامت ثبت بشه، یا مستقیم توی خود کانال سروش پیام بده.</p>
+        <div class="channel-info">
+          <span class="glyph"></span>
+          <a href="https://splus.ir/httpstmeWorldWarRoyal" target="_blank" rel="noopener">splus.ir/httpstmeWorldWarRoyal</a>
+        </div>
+      </div>
+      <form id="supportForm">
+        <div>
+          <label for="name">اسمت</label>
+          <input type="text" id="name" required placeholder="مثلاً علی">
+        </div>
+        <div>
+          <label for="topic">موضوع پیام</label>
+          <select id="topic">
+            <option>سوال عمومی</option>
+            <option>گزارش مشکل فنی</option>
+            <option>پیشنهاد محتوا</option>
+            <option>گزارش تخلف / محتوای نامناسب</option>
+          </select>
+        </div>
+        <div>
+          <label for="message">پیامت</label>
+          <textarea id="message" required placeholder="بنویس چی شده..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">ارسال پیام</button>
+        <div class="form-note" id="formNote">پیامت ثبت شد. تیم پشتیبانی در سریع‌ترین زمان جواب می‌ده.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-code">۰۴ / سوالات متداول</div>
+        <h2>قبل از پرسیدن، این‌ها رو بخون</h2>
+      </div>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q">چطور یه کشور بگیرم و بازی رو شروع کنم؟<span class="icon">+</span></button>
+        <div class="faq-a"><p>اول از دکمه‌ی بالا عضو کانال شو، بعد توی پست‌های «انتخاب کشور» ثبت‌نام کن تا یه کشور بهت اختصاص داده بشه.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">اتحاد و دشمنی چطور مشخص می‌شه؟<span class="icon">+</span></button>
+        <div class="faq-a"><p>بعد از گرفتن کشور، خودت با بقیه‌ی بازیکن‌ها وارد مذاکره می‌شی و تصمیم می‌گیری متحدشون بشی یا دشمن؛ نتیجه‌ی این روابط توی کانال اعلام می‌شه.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">جوایز نقدی چطور و کِی پرداخت می‌شه؟<span class="icon">+</span></button>
+        <div class="faq-a"><p>جزئیات مبلغ، شرایط برنده‌شدن و نحوه‌ی پرداخت توی خود کانال اعلام می‌شه؛ اگه سوال خاصی داری از فرم پشتیبانی بپرس.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">اگه توی بازی اختلاف یا تخلفی پیش بیاد چیکار کنم؟<span class="icon">+</span></button>
+        <div class="faq-a"><p>از فرم پشتیبانی گزینه‌ی «گزارش تخلف» رو انتخاب کن و ماجرا رو توضیح بده تا تیم بازی بررسی کنه.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div id="page-rules" class="page">
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb" style="color: var(--gold); font-size: 13px; font-weight: 700; margin-bottom: 10px;">قوانین بازی</div>
+    <h1>قوانین بازی جنگ جهانی رویال</h1>
+    <p class="lead">همه‌چیز درباره‌ی نحوه‌ی بازی: از انتخاب کشور تا اداره‌ی دارایی‌ها، بیانیه، جنگ و امتیازگیری.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۱</span><h2>درباره‌ی بازی</h2></div>
+      <div class="rule-body">
+        <ul class="rule-list">
+          <li>جنگ جهانی رویال یک بازی نوشتاری و متنی در قالب پلتفرم تلگرام است.</li>
+          <li>این بازی قدرت تفکر و سیاست شما را محک می‌زند؛ چون تمام امور بازی مانند امور سیاسی و بین‌المللی در دنیای واقعی پیش می‌ره.</li>
+          <li>هر بازیکن یک کشور را به عنوان کشور خود انتخاب می‌کند و به عنوان شخص اول آن کشور (پادشاه، رئیس‌جمهور، رهبر، نخست‌وزیر) وظیفه‌ی اداره‌ی تمام امور کشور را برعهده دارد.</li>
+          <li>هدف هر بازیکن در این بازی، پیشروی کشورش می‌باشد.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۲</span><h2>انجام بازی</h2></div>
+      <div class="rule-body">
+        <ul class="rule-list">
+          <li>ابتدا هر بازیکن با مراجعه به پیوی مالک بازی، یک کشور را انتخاب می‌کند و از مالک بازی تحویل می‌گیرد. سپس بازیکن قادر به اداره‌ی تمام امور آن کشور می‌شود.</li>
+          <li>هر کشور یک لیست دارایی دارد که مربوط به تمام دارایی‌های آن کشور می‌باشد.</li>
+          <li>بازیکنان می‌توانند با خرید تجهیزات، دارایی‌های خود را به‌روزتر کنند.</li>
+          <li>کشورها برای پیروزی باید تلاش کنند تا در زمینه‌های مختلف (نظامی، سیاسی، فرهنگی و اقتصادی) تبدیل به یک کشور قدرتمند شوند.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۳</span><h2>پیروزی در بازی</h2></div>
+      <div class="rule-body">
+        <ul class="rule-list">
+          <li>ملاک اصلی پیروزی در این بازی، داشتن امتیاز بیشتر یک کشور نسبت به بقیه‌ی کشورهاست.</li>
+          <li>قدرتمند بودن یک کشور بر اساس امتیازاتی که در حوزه‌های نظامی، سیاسی و اقتصادی کسب می‌کند محاسبه می‌شود.</li>
+          <li>در نهایت کشوری که امتیاز کل آن از بقیه‌ی کشورها بیشتر باشد، بازی را خواهد برد.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۴</span><h2>دارایی‌ها</h2></div>
+      <div class="rule-body">
+        <ul class="rule-list">
+          <li>دارایی‌های اقتصادی کشور شامل: پول، بانک مرکزی، منابع و...</li>
+          <li>دارایی‌های نظامی کشور شامل: پایگاه‌ها، تسلیحات، پدافندها و...</li>
+          <li>دارایی‌های صنعتی کشور شامل: کارخانه‌جات، معادن، پالایشگاه و...</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۵</span><h2>ابرقدرت‌ها</h2></div>
+      <div class="rule-body">
+        <ul class="rule-list">
+          <li>هر ۵ روز یک‌بار، سه کشور به عنوان ابرقدرت طبق شرایط زیر شناسایی می‌شوند: ابرقدرت نظامی (بیشترین تجهیزات نظامی)، ابرقدرت سیاسی (بیشترین روابط و تعامل سیاسی با دیگر کشورها)، و ابرقدرت اقتصادی (بیشترین دارایی‌های مالی و اقتصادی).</li>
+          <li>ممکن است هر چهار روز، ابرقدرت‌ها با توجه به دارایی‌هایشان تغییر کنند.</li>
+          <li>ابرقدرت‌ها چهار عضو اصلی سازمان ملل متحد هستند و قدرت تصمیم‌گیری در قبال همان بخشی که در آن ابرقدرت هستند، برای ایجاد قوانین و لایحه در سازمان ملل را دارند.</li>
+          <li>هر کشوری که ابرقدرت یکی از بخش‌ها شود، جایزه‌ی مخصوص خودش را می‌گیرد.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۶</span><h2>بیانیه</h2></div>
+      <div class="rule-body">
+        <ul class="rule-list">
+          <li>هر کشور برای اطلاعیه، تعامل و گفتگو با کشورهای دیگر باید بیانیه ارسال کند.</li>
+          <li>هر کشور بیانیه‌ی خود را به ادمین مربوط به بیانیه ارسال می‌کند و ادمین در صورت تایید، بیانیه را داخل کانال بیانیه قرار می‌دهد.</li>
+          <li>بیانیه باید در فرم بیانیه ارسال شود؛ در غیر این صورت در کانال قرار نمی‌گیرد.</li>
+          <li>بیانیه باید حداقل ۵ خط و حداکثر ۵۰ خط باشد.</li>
+          <li>اگر در بیانیه‌ها بی‌احترامی، توهین یا فحش داده شود: بار اول جریمه، بار دوم تحریم و کاهش رضایت مردمی، و بار سوم خالی‌کردن کشور.</li>
+          <li>تمامی کشورها باید روزانه حداقل یک یا دو بیانیه بدهند؛ هر کشوری که بیشترین بیانیه را در یک روز بدهد جایزه می‌گیرد.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۷</span><h2>خرید تجهیزات</h2></div>
+      <div class="rule-body">
+        <ul class="rule-list">
+          <li>هر کشور برای خرید تجهیزات به کانال تجهیزات مراجعه کرده و با توجه به تجهیزات قابل‌فروش در آن کانال خرید می‌کند.</li>
+          <li>خرید باید در فرم خرید نوشته شود و سپس در گروه کشور خود ارسال شود.</li>
+          <li>هر تقلب درون فرم خرید جریمه دارد.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۸</span><h2>رضایت مردمی</h2></div>
+      <div class="rule-body">
+        <ul class="rule-list">
+          <li>رضایت مردمی یک کشور وابسته به برخی دارایی‌های آن کشور است؛ از جمله نفت (روزانه ۵٬۰۰۰ بشکه برای نگه‌داشتن رضایت مردمی).</li>
+          <li>در صورت کمتر شدن رضایت مردمی از ۴۰ درصد، شورش داخلی اتفاق می‌افتد.</li>
+          <li>هرچه درصد رضایت مردمی کمتر باشد، شورش شدیدتر خواهد بود؛ و زمانی که رضایت مردمی به ۱۰ درصد برسد، کشور دچار فروپاشی می‌شود.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۹</span><h2>سناریونویسی</h2></div>
+      <div class="rule-body">
+        <ul class="rule-list">
+          <li>بازیکنان در فرم‌های حمله و فرم‌های دفاع باید یک سناریو بنویسند.</li>
+          <li>این سناریو در واقع روش استفاده‌ی شما از تجهیزاتی است که در اختیار دارید.</li>
+          <li>سناریوی دفاع، حمله و... حداقل باید ۵ خط و حداکثر ۳۰ خط باشد.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۱۰</span><h2>حمله</h2></div>
+      <div class="rule-body">
+        <ul class="rule-list">
+          <li>در حین جنگ، کشوری که قصد حمله به یک کشور را دارد باید فرم حمله را برای مالک بازی ارسال کند.</li>
+          <li>این فرم با دفاع کشور حریف مقایسه و بررسی می‌شود و ممکن است تلفات بدهد؛ سناریوی خوب یک امتیاز مثبت است.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۱۱</span><h2>دفاع</h2></div>
+      <div class="rule-body">
+        <ul class="rule-list">
+          <li>در حین جنگ، تمام کشورها باید فرم دفاع بفرستند. اگر به کشوری حمله شود و فرم دفاع ارسال نکرده باشد، آن کشور مورد هجوم قرار می‌گیرد و بی‌دفاع تلقی می‌شود.</li>
+          <li>در زمانی که به یک کشور حمله می‌شود و آن کشور فرم دفاع ارسال نکند، حتی اگر تجهیزات دفاعی هم داشته باشد، دفاع انجام نمی‌شود.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۱۲</span><h2>نفت</h2></div>
+      <div class="rule-body">
+        <ul class="rule-list">
+          <li>یکی از مهم‌ترین ارکان بازی، نفت است.</li>
+          <li>بازیکنان برای نگه‌داشتن رضایت مردمی و تولید برخی تجهیزات به نفت نیاز دارند.</li>
+          <li>قیمت جهانی نفت در جلساتی که در سازمان ملل شکل می‌گیرد تعیین می‌شود.</li>
+          <li>اگر کشوری تنگه یا کانال استراتژیکی را مسدود کند، قیمت نفت بالا می‌رود.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۱۳</span><h2>محاسبه‌ی امتیاز</h2></div>
+      <div class="rule-body">
+        <ul class="rule-list">
+          <li>در حین جنگ، وقتی به کشوری حمله می‌کنید یا کشوری به شما حمله می‌کند، برنده‌ی این جدال چند مورد مشخص می‌کند: امتیاز تجهیزات مورد استفاده در حمله و دفاع با هم مقایسه می‌شود، و به سناریوی حمله و دفاع هم امتیاز داده می‌شود.</li>
+          <li>در نهایت امتیازات هر دو مورد با هم جمع و سپس تقسیم بر دو می‌شود.</li>
+          <li>هرکدام از طرفین که امتیاز بیشتری نسبت به طرف دیگر کسب کرده باشد، در این جدال پیروز می‌شود.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۱۴</span><h2>جدول امتیازات</h2></div>
+      <div class="rule-body">
+        <div class="score-table">
+          <div class="score-row"><span class="score-label">۱۰۰٪ رضایت مردمی (روزانه)</span><span class="score-value">۱۰ امتیاز</span></div>
+          <div class="score-row"><span class="score-label">ابرقدرت بودن</span><span class="score-value">۲۰ امتیاز</span></div>
+          <div class="score-row"><span class="score-label">میانجی‌گری موفق</span><span class="score-value">۵۰ امتیاز</span></div>
+          <div class="score-row"><span class="score-label">هر ۱٪ فتح‌کردن</span><span class="score-value">۳ امتیاز</span></div>
+          <div class="score-row"><span class="score-label">فتح کامل یک کشور</span><span class="score-value">۳۰۰ امتیاز</span></div>
+          <div class="score-row"><span class="score-label">عملیات نظامی موفق</span><span class="score-value">۴۰ امتیاز</span></div>
+          <div class="score-row"><span class="score-label">هر ۱٪ تخریب</span><span class="score-value">۵ امتیاز</span></div>
+          <div class="score-row"><span class="score-label">تخریب کامل یک کشور</span><span class="score-value">۲۵۰ امتیاز</span></div>
+          <div class="score-row"><span class="score-label">هر ترور موفق</span><span class="score-value">۱۰۰ امتیاز</span></div>
+          <div class="score-row"><span class="score-label">هر تصرف تنگه</span><span class="score-value">۸۰ امتیاز</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+</div>
+
+<div id="page-forms" class="page">
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb" style="color: var(--gold); font-size: 13px; font-weight: 700; margin-bottom: 10px;">فرم‌های بازی</div>
+    <h1>فرم‌های بازی جنگ جهانی رویال</h1>
+    <p class="lead">فرم‌هایی که برای انجام هر مرحله از بازی باید پر بشن، همه‌شون این‌جا جمع می‌شن.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۱</span><h2>سند رسمی اتحاد</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Alliance Treaty</span>
+          <button class="copy-btn" data-copy-target="form-01"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-01">☠️ Word War Royall ☠️
+
+🤝 Alliance Treaty | سند رسمی اتحاد
+
+━━━━━━━━━━━━━━━━━━
+
+🏳️ کشور اول:
+🏳️ کشور دوم:
+🏳️ کشور سوم:
+🏳️ کشور چهارم:
+🏳️ کشور پنجم:
+
+━━━━━━━━━━━━━━━━━━
+
+📜 نوع اتحاد:
+🪖 تعهدات نظامی:
+💰 تعهدات اقتصادی:
+🤝 تعهدات سیاسی و دیپلماتیک:
+📑 مفاد و شرایط کلی توافق:
+⏳ مدت اعتبار اتحاد:
+
+━━━━━━━━━━━━━━━━━━
+
+✍️ امضای رؤسای جمهور
+
+🇦 رئیس‌جمهور کشور اول: __
+🇧 رئیس‌جمهور کشور دوم: __
+🇨 رئیس‌جمهور کشور سوم: __
+🇩 رئیس‌جمهور کشور چهارم: __
+🇪 رئیس‌جمهور کشور پنجم: __
+
+━━━━━━━━━━━━━━━━━━
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۲</span><h2>قرارداد و تفاهم‌نامه</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Contract &amp; MOU</span>
+          <button class="copy-btn" data-copy-target="form-02"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-02">☠️ Word War Royal ☠️
+
+📜 فرم رسمی قرارداد و تفاهم‌نامه
+
+━━━━━━━━━━━━━━━━━━
+
+🌍 کشور / گروهک اول:
+🌍 کشور / گروهک دوم:
+
+━━━━━━━━━━━━━━━━━━
+
+📑 موضوع قرارداد:
+💰 غرامت یا خسارت توافق‌شده:
+📌 مفاد و شرایط قرارداد:
+⏳ مدت اعتبار قرارداد:
+
+━━━━━━━━━━━━━━━━━━
+
+✍️ امضای طرفین
+
+🖋 رئیس‌جمهور / فرمانده کشور یا گروهک اول: __
+🖋 رئیس‌جمهور / فرمانده کشور یا گروهک دوم: __
+
+━━━━━━━━━━━━━━━━━━
+
+⚖️ بند حقوقی
+
+⭕ در صورت نقض هر یک از مفاد این قرارداد توسط یکی از طرفین، پرونده به سازمان ملل ارجاع شده و مطابق قوانین بازی، کشور یا گروهک متخلف مشمول تحریم‌های بین‌المللی و سایر مجازات‌های تعیین‌شده توسط مدیریت خواهد شد.
+
+━━━━━━━━━━━━━━━━━━
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۳</span><h2>ترابری و انتقال محموله</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Cargo Transport</span>
+          <button class="copy-btn" data-copy-target="form-03"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-03">☠️ Word War Royal ☠️
+
+🚚 فرم رسمی ترابری و انتقال محموله
+
+━━━━━━━━━━━━━━━━━━
+
+🌍 کشور / گروهک مبدأ:
+🌍 کشور / گروهک مقصد:
+
+━━━━━━━━━━━━━━━━━━
+
+💰 ارزش محموله / هزینه ترابری:
+📦 نوع محموله:
+📊 مقدار محموله:
+🗺 مسیر دقیق حرکت:
+🛡 نیروهای اسکورت و محافظت:
+⏰ زمان رسیدن: (توسط ادمین تعیین می‌شود)
+
+━━━━━━━━━━━━━━━━━━
+
+✍️ امضای طرفین
+
+🖋 رئیس‌جمهور / فرمانده کشور یا گروهک مبدأ: __
+🖋 رئیس‌جمهور / فرمانده کشور یا گروهک مقصد: __
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ قوانین ترابری
+
+⭕ مسیر حرکت باید به‌صورت کامل و دقیق ثبت شود.
+
+━━━━━━━━━━━━━━━━━━
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۴</span><h2>خرید تجهیزات و دارایی</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Equipment Purchase</span>
+          <button class="copy-btn" data-copy-target="form-04"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-04">☠️ Word War Royal ☠️
+
+🛒 فرم رسمی خرید تجهیزات و دارایی
+
+━━━━━━━━━━━━━━━━━━
+
+⚙️ تجهیزات / دارایی خریداری‌شده:
+🔢 تعداد:
+💰 ارزش خرید:
+📈 درآمد روزانه اضافه‌شده:
+💷 بودجه قبل از خرید:
+💶 بودجه پس از خرید:
+
+━━━━━━━━━━━━━━━━━━
+
+✍️ تأیید نهایی
+
+🖋 امضای رئیس‌جمهور / فرمانده:
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ قوانین خرید:
+
+⭕ تمامی اطلاعات فرم باید کاملاً صحیح و مطابق قوانین بازی ثبت شود.
+⭕ اولین تقلب یا ارائه اطلاعات نادرست در فرم خرید، موجب جریمه مالی خواهد شد.
+⭕ در صورت تکرار تخلف، مدیریت WWR مجاز به اعمال مجازات‌های سنگین‌تر از جمله ابطال خرید یا تحریم اقتصادی خواهد بود.
+
+━━━━━━━━━━━━━━━
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۵</span><h2>درخواست وام</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Loan Request</span>
+          <button class="copy-btn" data-copy-target="form-05"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-05">☠️ Word War Royal ☠️
+
+💳 فرم رسمی درخواست وام
+
+━━━━━━━━━━━━━━━━━━
+
+🌍 کشور وام‌گیرنده:
+💵 مبلغ وام درخواستی:
+💷 مبلغ کل بازپرداخت: (مبلغ وام + ۲۰٪ کارمزد)
+⏳ مدت بازپرداخت: (توسط ادمین تعیین می‌شود)
+💸 مبلغ بازپرداخت روزانه: (توسط ادمین تعیین می‌شود)
+
+━━━━━━━━━━━━━━━━━━
+
+✍️ تأیید نهایی
+
+🖋 امضای رئیس‌جمهور / فرمانده: __
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ قوانین وام
+
+⭕ برای دریافت وام، ارسال این فرم الزامی است.
+⭕ عدم پرداخت اقساط در موعد مقرر، می‌تواند منجر به جریمه مالی، تحریم اقتصادی یا سایر مجازات‌های تعیین‌شده توسط مدیریت شود.
+
+━━━━━━━━━━━━━━━━━━
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۶</span><h2>ثبت شکایت</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Complaint</span>
+          <button class="copy-btn" data-copy-target="form-06"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-06">☠️ Word War Royal ☠️
+
+⚖️ فرم رسمی ثبت شکایت
+
+━━━━━━━━━━━━━━━━━━
+
+🌍 کشور شاکی:
+🌍 کشور / گروهک متهم:
+
+━━━━━━━━━━━━━━━━━━
+
+📋 شرح و دلیل شکایت:
+📑 مدارک و مستندات:
+💰 مبلغ غرامت یا خسارت درخواستی:
+
+━━━━━━━━━━━━━━━━━━
+
+✍️ تأیید نهایی
+
+🖋 امضای رئیس‌جمهور / فرمانده کشور شاکی: __
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ قوانین ثبت شکایت
+
+⭕ تمامی شکایات باید همراه با مدارک و مستندات معتبر ارسال شوند.
+⭕ ارائه اطلاعات نادرست یا شکایت بدون مدرک، می‌تواند موجب رد پرونده یا اعمال جریمه توسط مدیریت شود.
+⭕ رأی نهایی پس از بررسی توسط مدیریت WWR صادر خواهد شد.
+
+━━━━━━━━━━━━━━━━━━
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۷</span><h2>ارسال نفتکش</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Oil Tanker Shipment</span>
+          <button class="copy-btn" data-copy-target="form-07"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-07">☠️ Word War Royal ☠️
+
+🛢🛳 فرم رسمی ارسال نفتکش
+
+━━━━━━━━━━━━━━━━━━
+
+🗺 کشور فرستنده:
+📍 کشور مقصد:
+🗺 مسیر دقیق حرکت:
+🛢 مقدار نفت ارسالی:
+💰 ارزش محموله / قیمت فروش:
+🛩 نیروهای اسکورت و محافظت:
+⏰ زمان بازگشت نفتکش: (توسط ادمین تعیین می‌شود)
+
+━━━━━━━━━━━━━━━━━━
+
+🛂 اطلاعات عوارض عبور
+
+🗺 کشور دریافت‌کننده عوارض: (در صورت بسته بودن تنگه، کانال یا آبراه)
+💸 مبلغ عوارض پرداختی: (توسط کشور دریافت‌کننده عوارض تعیین می‌شود)
+
+━━━━━━━━━━━━━━━━━━
+
+✍️ تأیید نهایی
+
+🖋 امضای رئیس‌جمهور کشور فرستنده:
+🖋 امضای رئیس‌جمهور کشور دریافت‌کننده عوارض:
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ قوانین ارسال نفتکش
+
+⭕ در صورت بسته بودن تنگه، کانال یا آبراه راهبردی، پرداخت عوارض عبور الزامی است.
+⭕ اگر مسیر عبور کاملاً باز باشد، پرداخت هیچ‌گونه عوارضی الزامی نیست.
+⭕ مسیر حرکت باید به‌صورت کامل و دقیق ثبت شود؛ هرگونه تغییر مسیر بدون اعلام قبلی، مشمول قوانین بازی خواهد بود.
+
+━━━━━━━━━━━━━━━━━━
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۸</span><h2>ساخت پایگاه نظامی</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Military Base</span>
+          <button class="copy-btn" data-copy-target="form-08"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-08">☠️ Word War Royal ☠️
+
+🏛 فرم رسمی ساخت پایگاه نظامی
+
+━━━━━━━━━━━━━━━━━━
+
+🌍 کشور / گروهک اول:
+🌍 کشور / گروهک دوم: (در صورت ساخت پایگاه مشترک)
+
+━━━━━━━━━━━━━━━━━━
+
+📍 منطقه دقیق احداث پایگاه:
+🏗 نوع پایگاه: (✈️ هوایی / ⚓ دریایی / 🪖 زمینی)
+⚙️ تجهیزات و یگان‌های مستقر:
+💰 هزینه ساخت: (توسط ادمین تعیین می‌شود)
+
+━━━━━━━━━━━━━━━━━━
+
+✍️ تأیید نهایی
+
+🖋 امضای رئیس‌جمهور / فرمانده کشور یا گروهک اول:
+🖋 امضای رئیس‌جمهور / فرمانده کشور یا گروهک دوم:
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ قوانین ساخت پایگاه
+
+⭕ محل احداث پایگاه باید به‌صورت دقیق اعلام شود.
+⭕ نوع پایگاه و تجهیزات مستقر باید به‌طور کامل در فرم ثبت شوند.
+⭕ هزینه نهایی ساخت و زمان بهره‌برداری تنها توسط مدیریت WWR تعیین و تأیید خواهد شد.
+
+━━━━━━━━━━━━━━━━━━
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۰۹</span><h2>حمله نظامی</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Military Attack</span>
+          <button class="copy-btn" data-copy-target="form-09"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-09">☠️ Word War Royal ☠️
+
+🚀 فرم رسمی حمله نظامی
+
+━━━━━━━━━━━━━━━━━━
+
+🛫 کشور / گروهک مهاجم:
+🛡 کشور / گروهک مدافع:
+
+━━━━━━━━━━━━━━━━━━
+
+⚙️ تجهیزات و یگان‌های استفاده‌شده:
+🎯 اهداف حمله:
+🗺 محل یا محدوده عملیات:
+📄 سناریوی کامل حمله:
+
+━━━━━━━━━━━━━━━━━━
+
+✍️ تأیید نهایی
+
+🖋 امضای رئیس‌جمهور / فرمانده کل قوا:
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ قوانین حمله نظامی
+
+⭕ سناریونویسی یکی از مهم‌ترین بخش‌های بازی WWR است و کیفیت آن در بررسی عملیات تأثیر مستقیم دارد.
+⭕ سناریوی حمله باید حداقل ۱۰ خط بوده و شامل مراحل عملیات، نحوه استفاده از تجهیزات، اهداف، تاکتیک‌ها و برنامه اجرای حمله باشد.
+⭕ استفاده از تجهیزات ثبت‌نشده یا اطلاعات نادرست، تخلف محسوب شده و مطابق قوانین بازی رسیدگی خواهد شد.
+⭕ نتیجه نهایی عملیات و میزان خسارات، تنها پس از بررسی مدیریت WWR اعلام می‌شود.
+
+━━━━━━━━━━━━━━━━━━
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۱۰</span><h2>ثبت اختراع نظامی</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Military Invention</span>
+          <button class="copy-btn" data-copy-target="form-10"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-10">☠️ Word War Royal ☠️
+
+🛠 ⚙️ فرم رسمی ثبت اختراع نظامی
+
+━━━━━━━━━━━━━━━━━━
+
+🌍 کشور سازنده:
+🏷 نوع اختراع: (🚀 موشک / 🛩 جنگنده / 🚁 بالگرد / 🛸 پهپاد / 🚢 ناو / 🛡 سامانه پدافندی / ⚙️ سایر)
+🆔 نام اختراع:
+
+━━━━━━━━━━━━━━━━━━
+
+📖 مشخصات و ویژگی‌های فنی:
+🎯 کاربرد و کارایی عملیاتی:
+✅ مزایا: (توسط ادمین تعیین می‌شود)
+❌ معایب: (توسط ادمین تعیین می‌شود)
+💰 قیمت اختراع: (توسط ادمین – حداقل ۲۰ هزار دلار)
+🛢 نفت موردنیاز برای تولید: (توسط ادمین تعیین می‌شود)
+
+━━━━━━━━━━━━━━━━━━
+
+✍️ تأیید نهایی
+
+🖋 امضای رئیس‌جمهور / فرمانده کشور سازنده:
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ قوانین ثبت اختراع
+
+⭕ شرح اختراع باید حداقل ۱۰ خط بوده و شامل مشخصات فنی، نحوه عملکرد، فناوری‌های به‌کاررفته و کاربرد عملیاتی باشد.
+⭕ اختراع باید واقع‌گرایانه بوده و کشور سازنده از نظر فناوری و توان صنعتی، قابلیت ساخت آن را داشته باشد.
+⭕ مزایا، معایب، قیمت و میزان نفت موردنیاز تنها توسط مدیریت WWR تعیین و تأیید خواهد شد.
+⭕ اختراعات غیرواقعی، کپی‌شده یا خارج از توانایی کشور، رد خواهند شد.
+
+━━━━━━━━━━━━━━━━━━
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۱۱</span><h2>عملیات نظامی</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Military Operation</span>
+          <button class="copy-btn" data-copy-target="form-11"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-11">☠️ Word War Royal ☠️
+
+🪖 فرم رسمی عملیات نظامی
+
+━━━━━━━━━━━━━━━━━━
+
+🚀 کشور / گروهک مهاجم:
+🛡 کشور / گروهک مدافع:
+
+━━━━━━━━━━━━━━━━━━
+
+⚙️ تجهیزات و یگان‌های استفاده‌شده:
+🎯 هدف عملیات:
+🗺 محل یا محدوده عملیات:
+📄 سناریوی کامل عملیات:
+
+━━━━━━━━━━━━━━━━━━
+
+✍️ تأیید نهایی
+
+🖋 امضای رئیس‌جمهور / فرمانده کل قوا: __
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ قوانین عملیات
+
+⭕ این فرم برای ثبت تمامی عملیات نظامی، حمله به نفتکش، حمله به کاروان‌های ترابری، عملیات ترور، عملیات ویژه، جنگ سایبری، حملات هکری و سایر عملیات امنیتی الزامی است.
+⭕ سناریوی عملیات باید کامل، شفاف و مطابق قوانین بازی نوشته شود.
+⭕ نتیجه نهایی عملیات، میزان خسارات، تلفات و موفقیت مأموریت تنها توسط مدیریت WWR بررسی و اعلام خواهد شد.
+⭕ استفاده از تجهیزات ثبت‌نشده یا اطلاعات نادرست، تخلف محسوب شده و مطابق قوانین بازی رسیدگی خواهد شد.
+
+━━━━━━━━━━━━━━━━━━
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۱۲</span><h2>بستن تنگه</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Strait Closure</span>
+          <button class="copy-btn" data-copy-target="form-12"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-12">☠️ Word War Royal ☠️
+
+🚫 فرم رسمی بستن تنگه
+
+-----------
+
+🪝 نام تنگه:
+🗺 علت بستن:
+💸 عوارضی تنگه:
+🏳 کشور های مجاز عبور از تنگه:
+✈️ امنیت تنگه:
+
+------------------
+
+⚠️ بسته شدن هر یک از تنگه ها در قیمت نفت تاثیر جدی خواهد گذاشت.
+⚠️ برای خطر های احتمالی شما برای بستن تنگه نیاز است از تنگه بسته شده محافظت کنید.
+
+----------------
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۱۳</span><h2>بیانیه</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Official Statement</span>
+          <button class="copy-btn" data-copy-target="form-13"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-13">☠️ Word War Royal ☠️
+
+📜 فرم رسمی بیانیه
+
+_
+
+❮ 🏳️ ❯ ─⊱ بیانیه رسمی‌کشور:
+❮ 👑 ❯ ─⊱ فرستانده بیانیه:
+❮ ❗️ ❯ ─⊱ خطاب به:
+
+_
+
+❮ 📜 ❯ ─⊱ متن بیانیه:
+
+__
+
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۱۴</span><h2>رول اقتصادی</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Economic Plan</span>
+          <button class="copy-btn" data-copy-target="form-14"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-14">☠️ Word War Royal ☠️
+
+💸 فرم رسمی رول اقتصادی
+
+━━━━━━━━━━━━━━━━━━
+
+🌍 کشور:
+🏷 نام رول اقتصادی:
+📈 اهداف اقتصادی:
+👥 اهداف مردمی و اجتماعی:
+💰 هزینه اجرای رول: (توسط ادمین تعیین می‌شود)
+📜 متن کامل رول اقتصادی:
+
+━━━━━━━━━━━━━━━━━━
+
+✍️ تأیید نهایی
+
+🖋 امضای رئیس‌جمهور:
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ قوانین رول اقتصادی
+
+⭕ متن رول باید حداقل ۱۵ خط بوده و به‌صورت کامل مراحل اجرای طرح را توضیح دهد.
+⭕ اهداف اقتصادی و مردمی باید واقع‌گرایانه، قابل اجرا و متناسب با شرایط کشور باشند.
+⭕ هزینه اجرای رول، میزان موفقیت و نتایج نهایی تنها توسط مدیریت WWR بررسی و اعلام خواهد شد.
+⭕ رول‌های غیرواقعی، اغراق‌آمیز یا مغایر با قوانین بازی، رد خواهند شد.
+
+━━━━━━━━━━━━━━━━━━
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۱۵</span><h2>اعلام جنگ</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>War Declaration</span>
+          <button class="copy-btn" data-copy-target="form-15"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-15">☠️ Word War Royal ☠️
+
+📣 فرم رسمی اعلام جنگ
+
+——————
+
+🏳️ کشور اعلان‌کننده:
+🏴 کشور هدف:
+📌 دلیل اعلام جنگ:
+🎯 اهداف جنگ:
+📅 تاریخ اعلام:
+
+✍️ امضا رئیس جمهور/ فرمانده:
+
+--------
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۱۶</span><h2>دفاع نفوذ</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Infiltration Defense</span>
+          <button class="copy-btn" data-copy-target="form-16"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-16">☠️ Word War Royal ☠️
+
+💻🛡️ فرم رسمی دفاع نفوذ
+
+————————
+
+•🛡️ کشور دفاع کننده:
+•⚙ تجهیزات مورد استفاده:
+•💥 اهدافی که از آنها دفاع می‌شود:
+•📍 منطقه تحت دفاع:
+•📜 شروع سناریو:
+
+———————————
+
+•🖋️ امضا رئیس جمهور:
+
+————————
+☠️ Word War Royal ☠️</pre>
+      </div>
+    </div>
+
+    <div class="rule-block">
+      <div class="rule-head"><span class="rule-num">۱۷</span><h2>دفاع نظامی</h2></div>
+      <div class="form-card">
+        <div class="form-card-head"><span>Military Defense</span>
+          <button class="copy-btn" data-copy-target="form-17"><span class="copy-label">کپی متن</span></button>
+        </div>
+        <pre class="form-text" id="form-17">☠️ World War Royal ☠️
+
+🛡 فرم رسمی دفاع نظامی
+
+━━━━━━━━━━━━━━━━━━
+
+🛡 کشور / گروهک مدافع:
+🧨 کشور / گروهک مهاجم:
+
+━━━━━━━━━━━━━━━━━━
+
+⚙️ تجهیزات و یگان‌های استفاده‌شده در دفاع:
+🎯 تجهیزات، تأسیسات یا مناطق تحت حفاظت:
+📍 موقعیت استقرار تجهیزات دفاعی:
+📄 سناریوی کامل دفاع:
+
+━━━━━━━━━━━━━━━━━━
+
+✍️ تأیید نهایی
+
+🖋 امضای رئیس‌جمهور / فرمانده کل قوا: __
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ قوانین دفاع نظامی
+
+⭕ سناریونویسی یکی از مهم‌ترین بخش‌های بازی WWR است و در نتیجه نهایی دفاع تأثیر مستقیم دارد.
+⭕ سناریوی دفاع باید حداقل ۱۵ خط بوده و محل دقیق استقرار تجهیزات دفاعی، نحوه واکنش به حمله، تاکتیک‌های دفاعی و شیوه استفاده از تجهیزات را به‌طور کامل توضیح دهد.
+⭕ نتیجه نهایی نبرد، میزان خسارات و موفقیت عملیات دفاعی تنها پس از بررسی مدیریت WWR اعلام خواهد شد.
+⭕ استفاده از تجهیزات ثبت‌نشده یا ارائه اطلاعات نادرست، تخلف محسوب شده و مطابق قوانین بازی رسیدگی می‌شود.
+
+━━━━━━━━━━━━━━━━━━
+☠️ World War Royal ☠️</pre>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+</div>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="foot-brand">جنگ جهانی رویال · WWR</div>
+    <div class="foot-note">این سایت مستقل از سروش ساخته شده و صرفاً برای پشتیبانی کانال است.</div>
+  </div>
+</footer>
+
+<script>
+  // Ember particles
+  (function(){
+    const container = document.getElementById('heroEmbers');
+    const count = 22;
+    for(let i=0;i<count;i++){
+      const s = document.createElement('span');
+      const left = Math.random()*100;
+      const duration = 7 + Math.random()*7;
+      const delay = Math.random()*10;
+      const drift = (Math.random()*40 - 20) + 'px';
+      s.style.left = left + '%';
+      s.style.animationDuration = duration + 's';
+      s.style.animationDelay = delay + 's';
+      s.style.setProperty('--drift', drift);
+      container.appendChild(s);
+    }
+  })();
+
+  // Subtle 3D parallax on mouse move
+  (function(){
+    const hero = document.getElementById('heroSection');
+    const stage = document.getElementById('heroStage');
+    if(!hero || !stage) return;
+    const maxTilt = 5;
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      stage.style.transform = `rotateY(${x * maxTilt}deg) rotateX(${-y * maxTilt}deg) scale(1.01)`;
+    });
+    hero.addEventListener('mouseleave', () => {
+      stage.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
+    });
+
+    // gentle parallax on scroll too
+    window.addEventListener('scroll', () => {
+      const rect = hero.getBoundingClientRect();
+      if(rect.bottom < 0 || rect.top > window.innerHeight) return;
+      const progress = 1 - (rect.bottom / (rect.height + window.innerHeight));
+      stage.style.setProperty('--scrollY', (progress * 30) + 'px');
+    }, { passive: true });
+  })();
+
+  // Page navigation (Home / Rules) - no real links, just section switching
+  (function(){
+    const navLinks = document.querySelectorAll('.nav-links a, [data-page]');
+    function showPage(name){
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById('page-' + name);
+      if(target) target.classList.add('active');
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.toggle('active', a.dataset.page === name);
+      });
+      window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+    }
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const name = link.dataset.page;
+        if(name) showPage(name);
+      });
+    });
+  })();
+
+  // Copy-to-clipboard for form templates
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.copyTarget;
+      const el = document.getElementById(targetId);
+      if(!el) return;
+      const text = el.innerText;
+      const label = btn.querySelector('.copy-label');
+      const original = label.textContent;
+      const done = () => {
+        btn.classList.add('copied');
+        label.textContent = 'کپی شد ✓';
+        setTimeout(() => { btn.classList.remove('copied'); label.textContent = original; }, 2000);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(el, done));
+      } else {
+        fallbackCopy(el, done);
+      }
+    });
+  });
+  function fallbackCopy(el, done){
+    const range = document.createRange();
+    range.selectNode(el);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    try{ document.execCommand('copy'); done(); }catch(err){}
+    sel.removeAllRanges();
+  }
+
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const answer = item.querySelector('.faq-a');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  document.getElementById('supportForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const note = document.getElementById('formNote');
+    note.classList.add('show');
+    this.reset();
+    setTimeout(() => note.classList.remove('show'), 5000);
+  });
+</script>
+
+</body>
+</html>
